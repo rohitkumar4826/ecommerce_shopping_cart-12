@@ -1,0 +1,78 @@
+/* Common styles for all screen sizes */
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartItem {
+  width: 100%;
+  max-width: 43.75rem; /* Converted from 700px to 43.75rem */
+  height: 15.625rem; /* Converted from 250px to 15.625rem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0.1875rem 0.9375rem rgba(0, 0, 0, 0.2); /* Converted from 0px 3px 15px rgba(0, 0, 0, 0.2) */
+  border-radius: 1.5625rem; /* Converted from 25px to 1.5625rem */
+  margin: 1.875rem; /* Converted from 30px to 1.875rem */
+  box-sizing: content-box;
+}
+
+.cartItem img {
+  width: 12.5rem; /* Converted from 200px to 12.5rem */
+  margin-left:0.9rem;
+}
+
+.cartItem .description {
+  font-size: 1.475rem; /* Converted from 30px to 1.875rem */
+  margin-right:0.9rem ;
+  height:12.5rem;
+  overflow: auto;
+}
+
+.countHandler input {
+  width: 18%; /* Converted from 40px to 2.5rem */
+  text-align: center;
+  font-weight: bold; /* 'bold' instead of 'bolder' for better cross-browser support */
+}
+
+
+.checkout button {
+  width: auto; /* Converted from 150px to 9.375rem */
+   height: 3.125rem;  
+  background-color: rgb(19, 19, 19);
+  color: white;
+  border: none;
+  border-radius: 0.5rem; /* Converted from 8px to 0.5rem */
+  margin: 1.25rem; /* Converted from 10px to 1.25rem */
+  cursor: pointer;
+}
+.countHandler button{
+  width:3rem;
+  
+}
+
+/* Responsive styles for medium devices */
+@media (min-width: 48rem) { /* Converted from 768px to 48rem */
+  .cartItem {
+    width: 31.25rem; /* Converted from 500px to 31.25rem */
+    height: 14.5rem; /* Converted from 200px to 12.5rem */
+    box-sizing: content-box;
+  }
+}
+
+/* Responsive styles for small devices */
+@media (max-width: 36rem) { /* Converted from 576px to 36rem */
+  .cartItem {
+    width: 22.75rem; /* Converted from 300px to 18.75rem */
+    height: 12.375rem; /* Converted from 150px to 9.375rem */
+    margin: 1.25rem; /* Adjust margin for better spacing on smaller screens */
+    box-sizing: content-box;
+  }
+
+  .cartItem .description {
+    font-size: 1.25rem; /* Converted from 20px to 1.25rem */
+   
+  }
+}
