@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,7 +8,7 @@ const Message = require('./models/Message');
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { body, validationResult } = require("express-validator"); 
-
+const port=process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());
@@ -123,6 +124,6 @@ async (req, res) => {
   });
   
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("Server is running");
 });
