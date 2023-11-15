@@ -1,23 +1,20 @@
 import React from "react"
 import "./login.css";
-import {useState} from "react"
+import {useState} from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"
-import {useNavigate} from "react-router-dom"
-
-
-export const Login = () => {
-    const [email,setEmail]=useState();
-    const [password,setPassword]=useState();
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+export const Admin = () => {
+    const [email,setEmail]=useState('');
+    const [password,setPassword]=useState('');
     const navigate = useNavigate();
     const handleSubmit=(e)=>{
-      e.preventDefault()
-      axios.post('http://localhost:3001/login',{email,password})
+      e.preventDefault();
+      console.log('email,password',email,password);
+      axios.post('http://localhost:3001/admin',{email,password})
       .then(result=>
-       {console.log(result);
-        const token = result.data.token;
-        localStorage.setItem("authToken", token); // Set the token in local storage
-       navigate("/shop");
+       {console.log(result.data);
+       navigate("/userview");
        }
        )
        .catch(error => {
@@ -33,7 +30,7 @@ export const Login = () => {
     <>
     <div className="containe">
       <div className="wrapper">
-        <div className="title"><span>Login Form</span></div>
+        <div className="title"><span>Admin Form</span></div>
         <form method="post" onSubmit={handleSubmit}  className="form" >
           <div className="row">
             <i className="fas fa-user"></i>
@@ -43,12 +40,10 @@ export const Login = () => {
             <i className="fas fa-lock"></i>
             <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} aria-label="password" required  />
           </div>
-          <div className="pass"><Link to="">Forgot password?</Link></div>
-          <div className="pass"><Link to="/admin">Admin</Link></div>
+          <div className="signup-link">Not a member? <Link to="/">Signup Now</Link></div>
           <div className="row button">
             <input type="submit" value="Login" aria-label="submit" />
           </div>
-          <div className="signup-link">Not a member? <Link to="/">Signup Now</Link></div>
         </form>
       </div>
     </div>

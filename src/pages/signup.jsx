@@ -27,7 +27,7 @@ export const SignUp = () => {
   }
   return (
    
-    <div className="container">
+    <div className="containe">
       <div className="wrapper">
         <div className="title"><span>SignUp Form</span></div>
         <form action="#" onSubmit={handleSubmit}>
@@ -46,9 +46,9 @@ export const SignUp = () => {
           <div className="row button">
             <input type="submit" value="Sign Up" aria-label="submit" />
           </div>
-        
+          <div className="signup-link">Already registered? <Link to="/login">Login</Link></div>
         </form>
-        <div className="signup-link">Already registered? <Link to="/login">Login</Link></div>
+        
       </div>
     </div>
   );

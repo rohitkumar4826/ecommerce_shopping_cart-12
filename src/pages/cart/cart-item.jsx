@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
 
 export const CartItem = (props) => {
-  const { id, productName, price, productImage } = props.data;
+  const { id, productName, price, images} = props.data;
   const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
     useContext(ShopContext);
 
   return (
     <div className="cartItem">
-      <img src={productImage} alt="Product item" />
+      <img src={images[0]} alt="Product item" className="overflow-scroll rounded-md" />
       <div className="description">
         <p>
           <b>{productName}</b>

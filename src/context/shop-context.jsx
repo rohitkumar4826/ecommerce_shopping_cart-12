@@ -49,9 +49,9 @@ export const ShopContextProvider = (props) => {
     getTotalCartAmount,
     checkout,
   };
-
+  const totalAmount = getTotalCartAmount();
   return (
-    <ShopContext.Provider value={contextValue}>
+    <ShopContext.Provider value={{ ...contextValue, totalAmount }}>
       {props.children}
     </ShopContext.Provider>
   );

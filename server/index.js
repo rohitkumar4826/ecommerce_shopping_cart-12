@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const Razorpay = require('razorpay');
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
@@ -20,6 +21,28 @@ mongoose.connect("mongodb://127.0.0.1:27017/employee")
   })
   .catch(error => {
     console.error('Database connection error:', error);
+  });
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET,
+  });
+
+  app.post('/create-order', async (req, res) => {
+    const { amount } = req.body; // Amount in paise (e.g., 1000 paise = ₹10)
+  
+    const options = {
+      amount, // Amount in paise
+      currency: 'INR',
+    };
+  
+    try {
+      const order = await razorpay.orders.create(options);
+      console.log(order);
+      res.json(order);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error creating order');
+    }
   });
 
 app.post('/signup', async (req, res) => {
@@ -70,6 +93,70 @@ app.post('/login', async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
       res.json({ message: 'Login successful', token });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
+  app.post('/admin', async (req, res) => {
+    if (req.body.token) {
+      // return res.status(401).json({ message: 'JWT token is missing' });
+    let tokencheck =jwt.verify(req.body.token,process.env.SECRET_KEY);
+    console.log('tokencheck',tokencheck);
+    if(tokencheck)
+    {
+      let msg = await Message.find({});
+      // console.log(msg);
+      let data =[];
+      msg.map((item)=>
+      {
+        if(item.email===process.env.ADMIN_MAIL)
+        {
+          return;
+        }
+        data.push({name:item.name,email:item.email,message:item.message})
+      })
+      console.log('data',data)
+      return res.json({ message: 'Login successful', data });
+    }
+  }
+
+    console.log("body",req.body);
+    console.log('params',req.params);
+    const { email, password } = req.body;
+  
+    try {
+      // Check if user with the provided email exists
+      const user = await EmployeeModel.findOne({ email});
+      console.log('user,email,password is for admin',user,email,password);
+      if (!user) {
+        return res.status(401).json({ message: 'Admin not found' });
+      }
+      console.log('user found');
+      // Compare the provided password with the stored hashed password
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
+        return res.status(402).json({ message: 'Invalid password' });
+      }
+      console.log('password matched')
+      if(email!==process.env.ADMIN_MAIL)
+      {
+        return res.status(300).json({message:'This is not admin'})
+      }
+      console.log('admin found');
+      let msg = await Message.find({});
+      // console.log(msg);
+      let data =[];
+      msg.map((item)=>
+      {
+        if(item.email===process.env.ADMIN_MAIL)
+        {
+          return;
+        }
+        data.push({name:item.name,email:item.email,message:item.message})
+      })
+      console.log('data',data)
+      res.json({ message: 'Login successful', data });
     } catch (error) {
       res.status(500).json(error);
     }

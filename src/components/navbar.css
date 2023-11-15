@@ -61,3 +61,8 @@
     font-size: 1.5625rem; /* Converted from 25px to 1.5625rem */
   }
 }
+.nav-right .total-amount {
+  font-size: 16px;
+  color: #16a085; /* Custom color for the total amount */
+  margin-right: 20px; /* Adjust spacing */
+}
