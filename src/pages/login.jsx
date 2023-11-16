@@ -12,7 +12,7 @@ export const Login = () => {
     const navigate = useNavigate();
     const handleSubmit=(e)=>{
       e.preventDefault()
-      axios.post('http://localhost:3001/login',{email,password})
+      axios.post('/login',{email,password})
       .then(result=>
        {console.log(result);
         const token = result.data.token;

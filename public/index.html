@@ -42,6 +42,17 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./serviceWorker.js').then(reg => {
+            console.log('worker registered');
+          })
+            .catch(err => {
+              console.log('error in servieWorker', err);
+            })
+        })
+      }
+    </script>
   </body>
 </html>

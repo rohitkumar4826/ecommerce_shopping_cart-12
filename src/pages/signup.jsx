@@ -9,7 +9,7 @@ export const SignUp = () => {
   const [cpassword, setCpassword]=useState();
   const handleSubmit = (e)=>{
     e.preventDefault()
-       axios.post('http://localhost:3001/signup',{email,password,cpassword})
+       axios.post('/signup',{email,password,cpassword})
        .then(result=>
         {console.log(result);
           const token = result.data.token;

@@ -24,7 +24,7 @@ export const Contact = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3001/contact', data, {
+      const response = await axios.post('/contact', data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

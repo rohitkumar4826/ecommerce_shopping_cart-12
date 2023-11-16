@@ -11,7 +11,7 @@ export const Admin = () => {
     const handleSubmit=(e)=>{
       e.preventDefault();
       console.log('email,password',email,password);
-      axios.post('http://localhost:3001/admin',{email,password})
+      axios.post('/admin',{email,password})
       .then(result=>
        {console.log(result.data);
        navigate("/userview");

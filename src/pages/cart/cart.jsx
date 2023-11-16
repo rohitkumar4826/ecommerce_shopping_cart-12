@@ -13,7 +13,7 @@ export const Cart = () => {
   const navigate = useNavigate();
   const createOrder = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/create-order', {
+      const response = await axios.post('/create-order', {
         amount: totalAmount*8200, // Replace with the desired amount
       });
       console.log('responce',response.data?.id);

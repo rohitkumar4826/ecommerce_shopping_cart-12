@@ -7,7 +7,7 @@ export const Userview = () => {
   useEffect(() => {
     // Fetch user data from the API
     let token= localStorage.getItem('authToken');
-    axios.post('http://localhost:3001/admin', {token}) // Adjust the API endpoint to match your server's route for user data
+    axios.post('/admin', {token}) // Adjust the API endpoint to match your server's route for user data
       .then((response) => {
         console.log('this is error',response.data);
         setUserData(response.data.data);
