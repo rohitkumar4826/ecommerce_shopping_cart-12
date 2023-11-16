@@ -6,7 +6,7 @@ const Payment = () => {
 
   const createOrder = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/create-order', {
+      const response = await axios.post('/create-order', {
         amount: 1000, // Replace with the desired amount
       });
       setOrderId(response.data.id);

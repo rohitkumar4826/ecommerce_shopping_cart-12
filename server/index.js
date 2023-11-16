@@ -14,8 +14,8 @@ const port=process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-mongoose.connect("mongodb://127.0.0.1:27017/employee")
+app.use(express.static(__dirname+"/build"));
+mongoose.connect(process.env.MONGO_LINK)
   .then(() => {
     console.log('Database connected');
   })
@@ -210,7 +210,10 @@ async (req, res) => {
     }
   });
   
-
+app.get('*',(req,res)=>
+{
+  res.sendFile(__dirname+"/build/index.html");
+})
 app.listen(port, () => {
   console.log("Server is running");
 });
